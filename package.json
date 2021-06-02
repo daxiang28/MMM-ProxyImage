@@ -1,0 +1,28 @@
+{
+  "name": "MMM-ProxyImage",
+  "version": "0.0.1",
+  "description": "Proxy Image for Magic Mirror",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daxiang28/MMM-ProxyImage"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "iframe",
+    "notification",
+    "module"
+  ],
+  "author": "daxiang28",
+  "contributors": ["https://github.com/daxiang28"],
+  "license": "MIT",
+  "bugs": {
+    "url": "hhttps://github.com/daxiang28/MMM-ProxyImage/issues"
+  },
+  "homepage": "https://github.com/daxiang28/MMM-ProxyImage",
+  "dependencies": {
+    "axios": "latest",
+    "express": "latest",
+    "base-64": "latest"
+  }
+}
