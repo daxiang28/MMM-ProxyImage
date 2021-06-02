@@ -1,6 +1,11 @@
 
 Module.register("MMM-ProxyImage",{
-	defaults: { },
+	defaults: { 
+		updateInterval: 4000,
+		port: 80,
+		height: 400,
+		width: 400,
+	},
 
 	start: function() {
 		// Allows for multiple instances of the module
