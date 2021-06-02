@@ -3,6 +3,11 @@
 - Adds an Express endpoint that the DOM renderer uses as an image source.
 - Bypasses the deprecation of [embedded credentials in subresource requests](https://www.chromestatus.com/feature/5669008342777856) where basic auth credentials are ignored in asset requests.
 
+## Screenshot
+![image](https://user-images.githubusercontent.com/260903/120546523-d7f2d280-c3a4-11eb-8bfc-16b1e166c627.png)
+Photo credits: 
+[Mikkel Bech](https://unsplash.com/photos/yjAFnkLtKY0), [Brian Babb](https://unsplash.com/photos/XbwHrt87mQ0), [Parker Coffman](https://unsplash.com/photos/zxsdh3DnMrU)
+
 ## Installation
 ```shell
 cd ~/MagicMirror/modules/
