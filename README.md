@@ -1,5 +1,5 @@
 # MMM-ProxyImage
-- Load basic auth security camera images into your Magic Mirror
+- Load basic auth security camera images into your Magic Mirror.
 - Adds an Express endpoint that the DOM renderer uses as an image source.
 - Bypasses the deprecation of [embedded credentials in subresource requests](https://www.chromestatus.com/feature/5669008342777856) where basic auth credentials are ignored in asset requests.
 
@@ -31,3 +31,6 @@ git clone https://github.com/daxiang28/MMM-ProxyImage
   }
 }
 ```
+
+## Credits
+This module was heavily influenced by Ulrich Wisser's [MMM-HTMLSnippet](https://github.com/ulrichwisser/MMM-HTMLSnippet) plugin.
