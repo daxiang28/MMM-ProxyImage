@@ -35,17 +35,25 @@ module.exports = NodeHelper.create({
 
 				const { auth, href } = url.parse(host[nextIndex]);
 				host = href;
-				[user, pass] = auth.split(':');
+				if (auth) {
+					[user, pass] = auth.split(':');
+				}
 
 				this.config[req.params.config].lastHostIndex = nextIndex;
 			}
 
 			try {
+				let authOptions = {};
+				if (user && pass) {
+					authOptions = {
+						auth: {
+							username: user,
+							password: pass
+						}
+					}
+				}
 				const response = await axios.get(host, {
-					auth: {
-						username: user,
-						password: pass
-					},
+					...authOptions,
 					responseType: 'arraybuffer'
 				});
 				res.set('Content-Type', 'image/jpeg');
