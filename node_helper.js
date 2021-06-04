@@ -40,16 +40,21 @@ module.exports = NodeHelper.create({
 				this.config[req.params.config].lastHostIndex = nextIndex;
 			}
 
-			const response = await axios.get(host, {
-				auth: {
-					username: user,
-					password: pass
-				},
-				responseType: 'arraybuffer'
-			});
-			res.set('Content-Type', 'image/jpeg');
-			res.set('Cache-Control', 'no-store');
-			res.end(response.data, 'binary');
+			try {
+				const response = await axios.get(host, {
+					auth: {
+						username: user,
+						password: pass
+					},
+					responseType: 'arraybuffer'
+				});
+				res.set('Content-Type', 'image/jpeg');
+				res.set('Cache-Control', 'no-store');
+				res.end(response.data, 'binary');
+			} catch (e) {
+				Log.error(e.message);
+				res.end(e.message);
+			}
     	});
 	}
 })
