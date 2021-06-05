@@ -1,6 +1,6 @@
-const axios = require('axios');
 const NodeHelper = require("node_helper")
 const url = require('url');
+const urllib = require('urllib');
 
 module.exports = NodeHelper.create({
 	start: function() {
@@ -22,7 +22,7 @@ module.exports = NodeHelper.create({
 
 	webserver: function() {
 		this.expressApp.get(`/${this.name}/:config`, async (req, res) => {
-			let { host, user, pass, lastHostIndex, cycles, cycleCount } = this.config[req.params.config];
+			let { host, user, pass, lastHostIndex, cycles, cycleCount, authType } = this.config[req.params.config];
 			
 			if (typeof host === 'object') {
 				let nextIndex = lastHostIndex;				
@@ -44,23 +44,20 @@ module.exports = NodeHelper.create({
 
 			try {
 				let authOptions = {};
+				const authKey = authType === 'digest' ? 'digestAuth' : 'auth';
 				if (user && pass) {
-					authOptions = {
-						auth: {
-							username: user,
-							password: pass
-						}
-					}
+					authOptions[authKey] = `${user}:${pass}`;
 				}
-				const response = await axios.get(host, {
-					...authOptions,
-					responseType: 'arraybuffer'
+	
+				const response = await urllib.request(host, {
+					method: 'GET',
+					...authOptions
 				});
+
 				res.set('Content-Type', 'image/jpeg');
 				res.set('Cache-Control', 'no-store');
 				res.end(response.data, 'binary');
 			} catch (e) {
-				Log.error(e.message);
 				res.end(e.message);
 			}
     	});

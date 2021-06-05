@@ -14,15 +14,16 @@
     "module"
   ],
   "author": "daxiang28",
-  "contributors": ["https://github.com/daxiang28"],
+  "contributors": [
+    "https://github.com/daxiang28"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "hhttps://github.com/daxiang28/MMM-ProxyImage/issues"
   },
   "homepage": "https://github.com/daxiang28/MMM-ProxyImage",
   "dependencies": {
-    "axios": "latest",
     "express": "latest",
-    "base-64": "latest"
+    "urllib": "^2.37.1"
   }
 }

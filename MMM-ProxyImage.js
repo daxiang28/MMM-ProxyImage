@@ -5,6 +5,7 @@ Module.register("MMM-ProxyImage",{
 		port: 80,
 		height: 400,
 		width: 400,
+		authType: 'basic' // basic|digest
 	},
 
 	start: function() {

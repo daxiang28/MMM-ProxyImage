@@ -13,6 +13,9 @@ Photo credits:
 ```shell
 cd ~/MagicMirror/modules/
 git clone https://github.com/daxiang28/MMM-ProxyImage
+
+cd ~/MagicMirror/modules/MMM-ProxyImage
+npm install
 ```
 
 ## Configuration
@@ -34,6 +37,7 @@ git clone https://github.com/daxiang28/MMM-ProxyImage
     width: 400, // Pixel width of the image
     user: '[USERNAME]', // Ignored if a host array is defined
     pass: '[PASSWORD]' // Ignored if a host array is defined
+    authType: 'basic' // basic||digest auth types
   }
 }
 ```
