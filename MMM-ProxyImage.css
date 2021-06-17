@@ -5,3 +5,7 @@
 .module.MMM-ProxyImage .image-wrapper {
     margin-bottom: 0;
 }
+
+img#proxy-image-modal-image {
+    border-radius: 10px
+}

@@ -25,7 +25,10 @@ npm install
   position: "top_left",
   config: {
     name: 'FrontDoor', // Must be unique if using multiple instances
-    updateInterval : 4000, // Duration between image refresh
+    modalEnabled: false, // Optional: Enables MMM-Modal functionality
+    updateInterval: 4000, // Duration between image refresh
+    modalInterval: 2000, // Optional: Will use the updateInterval if not provided 
+    modalTemplate: 'modal_template.njk', // Optional: Relative path of modal template file
     slideInterval: 10000, // Optional: Duration of each slide when multiple hosts are provided
     host: 'http://[CAMERA_IP]/[PATH_TO_STATIC_IMAGE]',
     // Alternately, use an array to cycle through sources 
@@ -39,6 +42,16 @@ npm install
     pass: '[PASSWORD]' // Ignored if a host array is defined
     authType: 'basic' // basic||digest auth types
   }
+}
+```
+
+## Modals
+This module uses [MMM-Module](https://github.com/fewieden/MMM-Modal). Follow the instructions provided there and enable modal functionality with the following config params:
+```javascript
+{
+  modalEnabled: false, // Optional: Enables MMM-Modal functionality
+  modalInterval: 2000, // Optional: Will use the updateInterval if not provided,
+  modalTemplate: 'modal_template.njk', // Optional: Relative path of modal template file
 }
 ```
 

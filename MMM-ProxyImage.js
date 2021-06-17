@@ -1,11 +1,15 @@
 
 Module.register("MMM-ProxyImage",{
 	defaults: { 
+		modalEnabled: false,
+		modalInterval: null,
+		modalTemplate: 'modal_template.njk',
 		updateInterval: 4000,
+		slideInterval: 10000,
 		port: 80,
 		height: 400,
 		width: 400,
-		authType: 'basic' // basic|digest
+		auth: 'basic' // basic|digest
 	},
 
 	start: function() {
@@ -32,11 +36,38 @@ Module.register("MMM-ProxyImage",{
 		}, nextLoad);
 	},
 
+	showModal: function(imageSrc) {
+		let self = this;
+		const refreshInterval = self.config.modalInterval || self.config.updateInterval;
+		this.sendNotification("OPEN_MODAL", {
+			template: self.config.modalTemplate,
+			data: {
+				imageSrc
+			},
+			options: {
+				callback: function(error) {
+					if (error) {
+						console.error('Modal rendering failed', error);
+						return false;
+					}
+					const modalTimer = setInterval(function() {
+						const modal = document.querySelector('.MMM-Modal');
+						if (modal.style.opacity == 1) {
+							const img = modal.querySelector('#proxy-image-modal-image');
+							img.src = imageSrc;
+						} else {
+							clearInterval(modalTimer);
+						}
+					}, refreshInterval);					
+				}					
+			}		
+		});
+	},
+
 	getDom: function() {
 		let self = this;
 		const d = new Date();
 		const wrapperId = "proxyDiv"+self.config.instanceName;
-		const wrapper2Id = "proxyDiv2"+self.config.instanceName;
 		let wrapper = document.getElementById(wrapperId);
 		const imgId = "proxyImage"+self.config.instanceName;
 		let img = document.getElementById(imgId);
@@ -50,11 +81,15 @@ Module.register("MMM-ProxyImage",{
 			wrapper.className = "image-wrapper"
 			wrapper.style.width = self.config.width + 'px';
 			wrapper.style.height = self.config.height + 'px';
-			wrapper.style.border = "none"
-			wrapper.style.display = "block"
-			wrapper.style.overflow = "hidden"
-			wrapper.style.backgroundColor = self.config.backgroundColor
-			wrapper.scrolling = "no"
+			wrapper.style.border = "none";
+			wrapper.style.display = "block";
+			wrapper.style.overflow = "hidden";
+			wrapper.style.backgroundColor = self.config.backgroundColor;
+			wrapper.scrolling = "no";		
+		}
+
+		if (self.config.modalEnabled) {
+			wrapper.onclick = function() { self.showModal(imageSrc) };
 		}
 
 		if (!img) {
